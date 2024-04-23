@@ -1,0 +1,25 @@
+name: Run Doxy
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Generate Doc
+        run: doxygen
+      
+      - name: Archive
+        uses: actions/upload-artifact@v2
+        with:
+          name: doc
+          path: |
+            /html
+            /latex
